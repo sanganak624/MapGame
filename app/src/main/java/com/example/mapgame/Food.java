@@ -19,9 +19,9 @@ public class Food extends Item {
                 '}';
     }
 
-    public Food(int mass, String description, int value)
+    public Food(int health, String description, int value)
     {
-        sethealth(mass);
+        sethealth(health);
         setDescription(description);
         setValue(value);
     }

@@ -10,7 +10,7 @@ public class Player {
     private int cash;
     private int health;
     private int equipmentMass;
-    private List<Equipment> equipment;
+    private List<Equipment> equipments;
 
     public int getRowLocation() {
         return rowLocation;
@@ -62,19 +62,27 @@ public class Player {
     }
 
     public List<Equipment> getEquipment() {
-        return equipment;
+        return equipments;
     }
 
-    public void setEquipment(List<Equipment> equipment) {
-        this.equipment = equipment;
+    public void setEquipment(List<Equipment> equipments) {
+        this.equipments = equipments;
     }
 
-    public void addEquipment(Equipment equipment) {
-        this.equipment.add(equipment);
+    public void addEquipment(Equipment equipments) {
+        this.equipments.add(equipments);
     }
 
     public Player(int rowLocation, int colLocation, int cash, int health, int equipmentMass, List<Equipment> equipment) {
         setEquipment(equipment);
+        setCash(cash);
+        setHealth(health);
+        setEquipmentMass(equipmentMass);
+        setRowLocation(rowLocation);
+        setColLocation(colLocation);
+    }
+
+    public Player(int rowLocation, int colLocation, int cash, int health, int equipmentMass) {
         setCash(cash);
         setHealth(health);
         setEquipmentMass(equipmentMass);

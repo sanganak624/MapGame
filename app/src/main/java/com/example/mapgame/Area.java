@@ -24,4 +24,7 @@ public class Area {
         this.town = town;
         this.items = items;
     }
+
+    public Area() {
+    }
 }

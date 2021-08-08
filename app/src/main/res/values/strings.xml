@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MapGame</string>
+    <string name="cash">cash</string>
+    <string name="health">health</string>
+    <string name="equipmentMass">equipmentMass</string>
+    <string name="gameStatus">gameStatus</string>
 </resources>

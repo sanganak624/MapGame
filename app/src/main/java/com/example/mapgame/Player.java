@@ -89,4 +89,25 @@ public class Player {
         setRowLocation(rowLocation);
         setColLocation(colLocation);
     }
+
+    public void decrementCol()
+    {
+        colLocation --;
+    }
+
+    public void decrementRow()
+    {
+        rowLocation --;
+    }
+
+    public void incrementCol()
+    {
+        colLocation ++;
+    }
+
+    public void incrementRow()
+    {
+        rowLocation ++;
+    }
+
 }

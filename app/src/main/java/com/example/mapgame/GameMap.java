@@ -5,6 +5,7 @@ public class GameMap {
 
     public GameMap(int size)
     {
+        grid = new Area[size][size];
         for(int i=0; i<size; i++)
         {
             for(int j=0; j<size; j++)
@@ -26,5 +27,10 @@ public class GameMap {
     public void setGrid(Area[][] areas)
     {
         grid = areas;
+    }
+
+    public Area getArea(int row, int col)
+    {
+        return grid[row][col];
     }
 }

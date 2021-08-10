@@ -147,7 +147,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/currentAreaText"
+        android:id="@+id/currentAreaText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -160,14 +160,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/currentAreaText2"
+        android:id="@+id/currentAreaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Current Area"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/currentAreaText"
+        app:layout_constraintBottom_toTopOf="@+id/currentAreaText2"
         app:layout_constraintEnd_toEndOf="parent"
 android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent" />

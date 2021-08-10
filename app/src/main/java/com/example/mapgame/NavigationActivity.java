@@ -1,5 +1,6 @@
 package com.example.mapgame;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,9 @@ public class NavigationActivity extends AppCompatActivity {
 
     private GameMap map = new GameMap(3);
     private Player player1;
+
+    private GameData gameData = GameData.getInstance();
+
 
     //Buttons
     private Button northButton;
@@ -26,6 +30,7 @@ public class NavigationActivity extends AppCompatActivity {
     private TextView health;
     private TextView equiptmentMass;
     private TextView currentArea;
+    private TextView currentAreaText2;
     private TextView status;
 
 
@@ -33,6 +38,7 @@ public class NavigationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
 
         northButton = (Button) findViewById(R.id.northButton);
         southButton = (Button) findViewById(R.id.southButton);
@@ -46,9 +52,13 @@ public class NavigationActivity extends AppCompatActivity {
         equiptmentMass = (TextView) findViewById(R.id.equiptmentMassText);
         currentArea = (TextView) findViewById(R.id.currentAreaText);
         status = (TextView) findViewById(R.id.statusText);
+        currentAreaText2 = (TextView) findViewById(R.id.currentAreaText2);
 
         gameSetup();
         gameUpdate();
+
+        gameData.setMap(map);
+        gameData.setPlayer(player1);
 
         northButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +104,13 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
 
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NavigationActivity.this, MarketActivity.class));
+            }
+        });
+
     }
 
     private void updateStatusBar()
@@ -129,10 +146,13 @@ public class NavigationActivity extends AppCompatActivity {
         if(town)
         {
             currentArea.setText("Town");
+            currentAreaText2.setVisibility(View.VISIBLE);
+            currentAreaText2.setText(area.getName());
         }
         else
         {
             currentArea.setText("Wilderness");
+            currentAreaText2.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -182,17 +202,17 @@ public class NavigationActivity extends AppCompatActivity {
 
 
 
-        areas[0][0] = new Area(true,GoalSet2);
-        areas[0][1] = new Area(true,defaultItems);
-        areas[0][2] = new Area(false,defaultItems);
+        areas[0][0] = new Area(true,GoalSet2,"Nancledra");
+        areas[0][1] = new Area(true,defaultItems,"Erast");
+        areas[0][2] = new Area(false,defaultItems,"");
 
-        areas[1][0] = new Area(false,defaultItems);
-        areas[1][1] = new Area(true,GoalSet1);
-        areas[1][2] = new Area(false,defaultItems);
+        areas[1][0] = new Area(false,defaultItems,"");
+        areas[1][1] = new Area(true,GoalSet1,"Whitebridge");
+        areas[1][2] = new Area(false,defaultItems,"");
 
-        areas[2][0] = new Area(true,defaultItems);
-        areas[2][1] = new Area(false,defaultItems);
-        areas[2][2] = new Area(false,GoalSet3);
+        areas[2][0] = new Area(true,defaultItems,"Spalding");
+        areas[2][1] = new Area(false,defaultItems,"");
+        areas[2][2] = new Area(false,GoalSet3,"");
 
         return areas;
     }

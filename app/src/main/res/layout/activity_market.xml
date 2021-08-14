@@ -48,11 +48,12 @@
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item"
+                android:text="Description"
                 android:gravity="center"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/textView8"
@@ -61,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:text="Buy"
                 android:gravity="center"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/textView9"
@@ -70,19 +72,22 @@
                 android:layout_height="wrap_content"
                 android:text="Sell"
                 android:gravity="center"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp"
+            >
 
         <TextView
             android:id="@+id/item1Text"
+            android:textSize="20sp"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:text="Item" />
 
@@ -92,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item1SellButton"
@@ -100,7 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -108,14 +115,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item2Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item2BuyButton"
@@ -123,7 +131,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item2SellButton"
@@ -131,7 +140,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -139,14 +149,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item3Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item3BuyButton"
@@ -154,7 +165,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item3SellButton"
@@ -162,7 +174,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -170,14 +183,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item4Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item4BuyButton"
@@ -185,7 +199,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item4SellButton"
@@ -193,7 +208,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -201,14 +217,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item5Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item5BuyButton"
@@ -216,7 +233,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item5SellButton"
@@ -224,7 +242,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -232,14 +251,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item6Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item6BuyButton"
@@ -247,7 +267,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item6SellButton"
@@ -255,7 +276,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -263,14 +285,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item7Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item7BuyButton"
@@ -278,7 +301,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item7SellButton"
@@ -286,7 +310,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -294,14 +319,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
                 android:id="@+id/item8Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
                 android:id="@+id/item8BuyButton"
@@ -309,16 +335,17 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
-                android:id="@+id/item9SellButton"
+                android:id="@+id/item8SellButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>
@@ -326,30 +353,33 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <TextView
-                android:id="@+id/item10Text"
+                android:id="@+id/item9Text"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="Item" />
+                android:text="Item"
+                android:textSize="20sp"/>
 
             <Button
-                android:id="@+id/item10BuyButton"
+                android:id="@+id/item9BuyButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#E91E63"
-                android:text="Buy" />
+                android:text="Buy"
+                android:textSize="20sp"/>
 
             <Button
-                android:id="@+id/item10SellButton"
+                android:id="@+id/item9SellButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
-                android:text="Sell" />
+                android:text="Sell"
+                android:textSize="20sp"/>
 
 
         </TableRow>

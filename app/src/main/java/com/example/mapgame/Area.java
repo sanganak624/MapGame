@@ -1,9 +1,11 @@
 package com.example.mapgame;
 
+import java.util.List;
+
 public class Area {
     private boolean town;
     private String name;
-    private Item items[];
+    private List<Item> items;
 
     public String getName() {
         return name;
@@ -21,19 +23,21 @@ public class Area {
         this.town = town;
     }
 
-    public Item[] getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Item[] items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
-    public Area(boolean town, Item[] items,String name) {
+    public Area(boolean town, List<Item> items,String name) {
         this.town = town;
         this.items = items;
         this.name = name;
     }
+
+
 
     public Area() {
     }

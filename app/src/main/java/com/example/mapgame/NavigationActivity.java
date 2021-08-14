@@ -8,12 +8,14 @@ import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class NavigationActivity extends AppCompatActivity {
 
-    private GameMap map = new GameMap(3);
-    private Player player1;
-
     private GameData gameData = GameData.getInstance();
+
+    private GameMap map = gameData.getMap();
+    private Player player1 = gameData.getPlayer();
 
 
     //Buttons
@@ -54,17 +56,14 @@ public class NavigationActivity extends AppCompatActivity {
         status = (TextView) findViewById(R.id.statusText);
         currentAreaText2 = (TextView) findViewById(R.id.currentAreaText2);
 
-        gameSetup();
+        //gameSetup();
         gameUpdate();
-
-        gameData.setMap(map);
-        gameData.setPlayer(player1);
 
         northButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                player1.setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
-                player1.incrementRow();
+                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().incrementRow();
                 gameUpdate();
             }
         });
@@ -72,8 +71,8 @@ public class NavigationActivity extends AppCompatActivity {
         southButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                player1.setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
-                player1.decrementRow();
+                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().decrementRow();
                 gameUpdate();
             }
         });
@@ -81,8 +80,8 @@ public class NavigationActivity extends AppCompatActivity {
         eastButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                player1.setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
-                player1.incrementCol();
+                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().incrementCol();
                 gameUpdate();
             }
         });
@@ -90,8 +89,8 @@ public class NavigationActivity extends AppCompatActivity {
         westButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                player1.setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
-                player1.decrementCol();
+                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().decrementCol();
                 gameUpdate();
             }
         });
@@ -115,9 +114,9 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void updateStatusBar()
     {
-        int player1EquipmentMass = player1.getEquipmentMass();
-        int player1Health = player1.getHealth();
-        int player1Cash = player1.getCash();
+        int player1EquipmentMass = gameData.getPlayer().getEquipmentMass();
+        int player1Health = gameData.getPlayer().getHealth();
+        int player1Cash = gameData.getPlayer().getCash();
 
         equiptmentMass.setText(Integer.toString(player1EquipmentMass));
         if(player1Health<=0)
@@ -137,9 +136,9 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void updateTextView()
     {
-        int row = player1.getRowLocation();
-        int col = player1.getColLocation();
-        Area area = map.getArea(row,col);
+        int row = gameData.getPlayer().getRowLocation();
+        int col = gameData.getPlayer().getColLocation();
+        Area area = gameData.getMap().getArea(row,col);
 
         Boolean town = area.isTown();
 
@@ -164,43 +163,41 @@ public class NavigationActivity extends AppCompatActivity {
     }
     private void gameSetup()
     {
-        map.setGrid(setAreas());
-        player1 = new Player(1,1,100,10,0);
+        gameData.getMap().setGrid(setAreas());
+        gameData.getPlayer().setPlayer(1,1,100,100,0);
     }
 
     private Area[][] setAreas()
     {
         Area[][] areas = new Area[3][3];
-        Item[] defaultItems = new Item[5];
-        Item[] GoalSet1 = new Item[5];
-        Item[] GoalSet2 = new Item[5];
-        Item[] GoalSet3 = new Item[5];
+        List<Item> defaultItems = null;
+        List<Item> GoalSet1 = null;
+        List<Item> GoalSet2 = null;
+        List<Item> GoalSet3 = null;
 
-        defaultItems[0] = new Equipment(1,"phone",1);
-        defaultItems[1] = new Food(10,"apple",1);
-        defaultItems[2] = new Food(-10,"mashroom",1);
-        defaultItems[3] = new Equipment(1,"rocks",1);
-        defaultItems[4] = new Equipment(1,"gold",1);
+        defaultItems.add(new Equipment(1,"phone",1));
+        defaultItems.add(new Food(10,"apple",1));
+        defaultItems.add(new Food(-10,"mashroom",1));
+        defaultItems.add(new Equipment(1,"rocks",1));
+        defaultItems.add(new Equipment(1,"gold",1));
 
-        GoalSet1[0] = new Equipment(1,"jade monkey",1);
-        GoalSet1[1] = new Food(10,"apple",1);
-        GoalSet1[2] = new Food(-10,"mashroom",1);
-        GoalSet1[3] = new Equipment(1,"rocks",1);
-        GoalSet1[4] = new Equipment(1,"gold",1);
+        GoalSet1.add(new Equipment(1,"jade monkey",1));
+        GoalSet1.add(new Food(10,"apple",1));
+        GoalSet1.add(new Food(-10,"mashroom",1));
+        GoalSet1.add(new Equipment(1,"rocks",1));
+        GoalSet1.add(new Equipment(1,"gold",1));
 
-        GoalSet2[0] = new Equipment(1,"the roadmap",1);
-        GoalSet2[1] = new Food(10,"apple",1);
-        GoalSet2[2] = new Food(-10,"mashroom",1);
-        GoalSet2[3] = new Equipment(1,"rocks",1);
-        GoalSet2[4] = new Equipment(1,"gold",1);
+        GoalSet2.add(new Equipment(1,"the roadmap",1));
+        GoalSet2.add(new Food(10,"apple",1));
+        GoalSet2.add(new Food(-10,"mashroom",1));
+        GoalSet2.add(new Equipment(1,"rocks",1));
+        GoalSet2.add(new Equipment(1,"gold",1));
 
-        GoalSet3[0] = new Equipment(1,"ice scraper",1);
-        GoalSet3[1] = new Food(10,"apple",1);
-        GoalSet3[2] = new Food(-10,"mashroom",1);
-        GoalSet3[3] = new Equipment(1,"rocks",1);
-        GoalSet3[4] = new Equipment(1,"gold",1);
-
-
+        GoalSet3.add(new Equipment(1,"ice scraper",1));
+        GoalSet3.add(new Food(10,"apple",1));
+        GoalSet3.add(new Food(-10,"mashroom",1));
+        GoalSet3.add(new Equipment(1,"rocks",1));
+        GoalSet3.add(new Equipment(1,"gold",1));
 
         areas[0][0] = new Area(true,GoalSet2,"Nancledra");
         areas[0][1] = new Area(true,defaultItems,"Erast");
@@ -219,10 +216,10 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void hideNavButtons()
     {
-        int row = player1.getRowLocation();
-        int col = player1.getColLocation();
+        int row = gameData.getPlayer().getRowLocation();
+        int col = gameData.getPlayer().getColLocation();
 
-        int health = player1.getHealth();
+        int health = gameData.getPlayer().getHealth();
         if(health>0)
         {
             if(row==0)

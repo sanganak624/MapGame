@@ -82,6 +82,15 @@ public class Player {
         setColLocation(colLocation);
     }
 
+    public void setPlayer(int rowLocation, int colLocation, int cash, int health, int equipmentMass)
+    {
+        setCash(cash);
+        setHealth(health);
+        setEquipmentMass(equipmentMass);
+        setRowLocation(rowLocation);
+        setColLocation(colLocation);
+    }
+
     public Player(int rowLocation, int colLocation, int cash, int health, int equipmentMass) {
         setCash(cash);
         setHealth(health);

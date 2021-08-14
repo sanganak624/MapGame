@@ -7,51 +7,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MarketActivity extends AppCompatActivity {
 
     private GameData gameData = GameData.getInstance();
 
     private Button leaveButton;
 
-    private Button item1BuyButton;
-    private Button item2BuyButton;
-    private Button item3BuyButton;
-    private Button item4BuyButton;
-    private Button item5BuyButton;
-    private Button item6BuyButton;
-    private Button item7BuyButton;
-    private Button item8BuyButton;
-    private Button item9BuyButton;
-    private Button item10BuyButton;
-
-    private Button item1SellButton;
-    private Button item2SellButton;
-    private Button item3SellButton;
-    private Button item4SellButton;
-    private Button item5SellButton;
-    private Button item6SellButton;
-    private Button item7SellButton;
-    private Button item8SellButton;
-    private Button item9SellButton;
-    private Button item10SellButton;
+    private List<Button> itemBuyButtons = new LinkedList<Button>();;
+    private List<Button> itemSellButtons = new LinkedList<Button>();;
+    private List<TextView> itemText = new LinkedList<TextView>();;
 
     private TextView locationText;
-    private TextView item1Text;
-    private TextView item2Text;
-    private TextView item3Text;
-    private TextView item4Text;
-    private TextView item5Text;
-    private TextView item6Text;
-    private TextView item7Text;
-    private TextView item8Text;
-    private TextView item9Text;
-    private TextView item10Text;
+
 
     private TextView cash;
     private TextView health;
     private TextView equiptmentMass;
-
-    Player player1;
 
 
     @Override
@@ -63,7 +37,40 @@ public class MarketActivity extends AppCompatActivity {
         health = (TextView) findViewById(R.id.healthText);
         equiptmentMass = (TextView) findViewById(R.id.equiptmentMassText);
 
-        player1 = gameData.getPlayer();
+        leaveButton = (Button) findViewById(R.id.leaveButton);
+
+        itemBuyButtons.add((Button) findViewById(R.id.item1BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item2BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item3BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item4BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item5BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item6BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item7BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item8BuyButton));
+        itemBuyButtons.add((Button) findViewById(R.id.item9BuyButton));
+
+        itemSellButtons.add((Button) findViewById(R.id.item1SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item2SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item3SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item4SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item5SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item6SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item7SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item8SellButton));
+        itemSellButtons.add((Button) findViewById(R.id.item9SellButton));
+
+        itemText.add((TextView) findViewById(R.id.item1Text));
+        itemText.add((TextView) findViewById(R.id.item2Text));
+        itemText.add((TextView) findViewById(R.id.item3Text));
+        itemText.add((TextView) findViewById(R.id.item4Text));
+        itemText.add((TextView) findViewById(R.id.item5Text));
+        itemText.add((TextView) findViewById(R.id.item6Text));
+        itemText.add((TextView) findViewById(R.id.item7Text));
+        itemText.add((TextView) findViewById(R.id.item8Text));
+        itemText.add((TextView) findViewById(R.id.item9Text));
+
+        updateStatusBar();
+        updateList();
 
         leaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +81,58 @@ public class MarketActivity extends AppCompatActivity {
 
     }
 
+    private void updateList()
+    {
+        Player player = gameData.getPlayer();
+        int row = player.getRowLocation();
+        int col = player.getColLocation();
+        Area area = gameData.getMap().getArea(row,col);
+
+        List<Item> items = area.getItems();
+        fillAreaItems(items);
+
+    }
+
+    private void fillAreaItems(List<Item> items)
+    {
+
+        int i = 0;
+        while(!items.isEmpty())
+        {
+            Item currentItem = items.remove(0);
+            if(currentItem.getClass().getSimpleName().equals("Equipment"))
+            {
+                Equipment currentEqu = (Equipment) currentItem;
+                Button buyButton = itemBuyButtons.get(i);
+                Button sellButton = itemSellButtons.get(i);
+                TextView textBox = itemText.get(i);
+
+                buyButton.setText(Integer.toString(currentEqu.getValue()));
+                sellButton.setText(Double.toString(currentEqu.getValue()*0.75));
+                textBox.setText(currentEqu.getDescription()+" mass:"+Integer.toString(currentEqu.getMass()));
+
+            }
+            else
+            {
+                Food currentEqu = (Food) currentItem;
+                Button buyButton = itemBuyButtons.get(i);
+                Button sellButton = itemSellButtons.get(i);
+                TextView textBox = itemText.get(i);
+
+                buyButton.setText(Integer.toString(currentEqu.getValue()));
+                sellButton.setText(Double.toString(currentEqu.getValue()*0.75));
+                textBox.setText(currentEqu.getDescription());
+            }
+            i++;
+        }
+
+    }
+
     private void updateStatusBar()
     {
-        int player1EquipmentMass = player1.getEquipmentMass();
-        int player1Health = player1.getHealth();
-        int player1Cash = player1.getCash();
+        int player1EquipmentMass = gameData.getPlayer().getEquipmentMass();
+        int player1Health = gameData.getPlayer().getHealth();
+        int player1Cash = gameData.getPlayer().getCash();
 
         equiptmentMass.setText(Integer.toString(player1EquipmentMass));
         health.setText(Integer.toString(player1Health));

@@ -1,10 +1,13 @@
 package com.example.mapgame;
 
 import android.media.audiofx.DynamicsProcessing;
+import android.support.annotation.NonNull;
+import android.widget.TextView;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class Player {
+public class Player implements Cloneable {
     private int rowLocation;
     private int colLocation;
     private int cash;
@@ -36,6 +39,7 @@ public class Player {
     public int getCash() {
         return cash;
     }
+
 
     public void setCash(int cash) {
         if(cash>=0) {
@@ -97,6 +101,7 @@ public class Player {
         setEquipmentMass(equipmentMass);
         setRowLocation(rowLocation);
         setColLocation(colLocation);
+        equipments = new LinkedList<Equipment>();
     }
 
     public void decrementCol()

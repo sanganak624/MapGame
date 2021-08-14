@@ -56,7 +56,6 @@ public class NavigationActivity extends AppCompatActivity {
         status = (TextView) findViewById(R.id.statusText);
         currentAreaText2 = (TextView) findViewById(R.id.currentAreaText2);
 
-        //gameSetup();
         gameUpdate();
 
         northButton.setOnClickListener(new View.OnClickListener() {
@@ -163,55 +162,8 @@ public class NavigationActivity extends AppCompatActivity {
     }
     private void gameSetup()
     {
-        gameData.getMap().setGrid(setAreas());
+        gameData.getMap().setGrid(gameData.setAreas());
         gameData.getPlayer().setPlayer(1,1,100,100,0);
-    }
-
-    private Area[][] setAreas()
-    {
-        Area[][] areas = new Area[3][3];
-        List<Item> defaultItems = null;
-        List<Item> GoalSet1 = null;
-        List<Item> GoalSet2 = null;
-        List<Item> GoalSet3 = null;
-
-        defaultItems.add(new Equipment(1,"phone",1));
-        defaultItems.add(new Food(10,"apple",1));
-        defaultItems.add(new Food(-10,"mashroom",1));
-        defaultItems.add(new Equipment(1,"rocks",1));
-        defaultItems.add(new Equipment(1,"gold",1));
-
-        GoalSet1.add(new Equipment(1,"jade monkey",1));
-        GoalSet1.add(new Food(10,"apple",1));
-        GoalSet1.add(new Food(-10,"mashroom",1));
-        GoalSet1.add(new Equipment(1,"rocks",1));
-        GoalSet1.add(new Equipment(1,"gold",1));
-
-        GoalSet2.add(new Equipment(1,"the roadmap",1));
-        GoalSet2.add(new Food(10,"apple",1));
-        GoalSet2.add(new Food(-10,"mashroom",1));
-        GoalSet2.add(new Equipment(1,"rocks",1));
-        GoalSet2.add(new Equipment(1,"gold",1));
-
-        GoalSet3.add(new Equipment(1,"ice scraper",1));
-        GoalSet3.add(new Food(10,"apple",1));
-        GoalSet3.add(new Food(-10,"mashroom",1));
-        GoalSet3.add(new Equipment(1,"rocks",1));
-        GoalSet3.add(new Equipment(1,"gold",1));
-
-        areas[0][0] = new Area(true,GoalSet2,"Nancledra");
-        areas[0][1] = new Area(true,defaultItems,"Erast");
-        areas[0][2] = new Area(false,defaultItems,"");
-
-        areas[1][0] = new Area(false,defaultItems,"");
-        areas[1][1] = new Area(true,GoalSet1,"Whitebridge");
-        areas[1][2] = new Area(false,defaultItems,"");
-
-        areas[2][0] = new Area(true,defaultItems,"Spalding");
-        areas[2][1] = new Area(false,defaultItems,"");
-        areas[2][2] = new Area(false,GoalSet3,"");
-
-        return areas;
     }
 
     private void hideNavButtons()

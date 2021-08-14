@@ -21,11 +21,12 @@ public class GameData {
     private GameData()
     {
         player = new Player(1,1,100,100,0);
+        player.addEquipment(new Equipment(1,"Phone",1));
         map = new GameMap(3);
         map.setGrid(setAreas());
     }
 
-    private Area[][] setAreas()
+    public Area[][] setAreas()
     {
         Area[][] areas = new Area[3][3];
         List<Item> defaultItems =  new LinkedList<Item>();;
@@ -33,29 +34,29 @@ public class GameData {
         List<Item> GoalSet2 = new LinkedList<Item>();;
         List<Item> GoalSet3 = new LinkedList<Item>();;
 
-        defaultItems.add(new Equipment(1,"phone",1));
-        defaultItems.add(new Food(10,"apple",1));
-        defaultItems.add(new Food(-10,"mashroom",1));
-        defaultItems.add(new Equipment(1,"rocks",1));
-        defaultItems.add(new Equipment(1,"gold",1));
+        defaultItems.add(new Equipment(1,"Phone",1));
+        defaultItems.add(new Food(10,"Apple",1));
+        defaultItems.add(new Food(-10,"Mashroom",1));
+        defaultItems.add(new Equipment(1,"Rocks",1));
+        defaultItems.add(new Equipment(1,"Gold",1));
 
-        GoalSet1.add(new Equipment(1,"jade monkey",1));
-        GoalSet1.add(new Food(10,"apple",1));
-        GoalSet1.add(new Food(-10,"mashroom",1));
-        GoalSet1.add(new Equipment(1,"rocks",1));
-        GoalSet1.add(new Equipment(1,"gold",1));
+        GoalSet1.add(new Equipment(1,"Jade monkey",1));
+        GoalSet1.add(new Food(10,"Apple",1));
+        GoalSet1.add(new Food(-10,"Mashroom",1));
+        GoalSet1.add(new Equipment(1,"Rocks",1));
+        GoalSet1.add(new Equipment(1,"Gold",1));
 
-        GoalSet2.add(new Equipment(1,"the roadmap",1));
-        GoalSet2.add(new Food(10,"apple",1));
-        GoalSet2.add(new Food(-10,"mashroom",1));
-        GoalSet2.add(new Equipment(1,"rocks",1));
-        GoalSet2.add(new Equipment(1,"gold",1));
+        GoalSet2.add(new Equipment(1,"The roadmap",1));
+        GoalSet2.add(new Food(10,"Apple",1));
+        GoalSet2.add(new Food(-10,"Mashroom",1));
+        GoalSet2.add(new Equipment(1,"Rocks",1));
+        GoalSet2.add(new Equipment(1,"Gold",1));
 
-        GoalSet3.add(new Equipment(1,"ice scraper",1));
-        GoalSet3.add(new Food(10,"apple",1));
-        GoalSet3.add(new Food(-10,"mashroom",1));
-        GoalSet3.add(new Equipment(1,"rocks",1));
-        GoalSet3.add(new Equipment(1,"gold",1));
+        GoalSet3.add(new Equipment(1,"Ice scraper",1));
+        GoalSet3.add(new Food(10,"Apple",1));
+        GoalSet3.add(new Food(-10,"Mashroom",1));
+        GoalSet3.add(new Equipment(1,"Rocks",1));
+        GoalSet3.add(new Equipment(1,"Gold",1));
 
         areas[0][0] = new Area(true,GoalSet2,"Nancledra");
         areas[0][1] = new Area(true,defaultItems,"Erast");

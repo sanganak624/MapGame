@@ -20,7 +20,7 @@ public class GameData {
 
     private GameData()
     {
-        player = new Player(1,1,100,5,0);
+        player = new Player(1,1,100,50,0);
         map = new GameMap(3);
         map.setGrid(setAreas());
     }

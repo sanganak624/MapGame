@@ -2,7 +2,7 @@ package com.example.mapgame;
 
 import java.util.List;
 
-public class Area implements Cloneable{
+public class Area {
     private boolean town;
     private String name;
     private List<Item> items;
@@ -35,10 +35,6 @@ public class Area implements Cloneable{
         this.town = town;
         this.items = items;
         this.name = name;
-    }
-
-    public Object clone()throws CloneNotSupportedException{
-        return super.clone();
     }
 
     public Area() {

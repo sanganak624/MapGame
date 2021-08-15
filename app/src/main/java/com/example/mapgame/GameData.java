@@ -20,8 +20,14 @@ public class GameData {
 
     private GameData()
     {
+        player = new Player(1,1,100,5,0);
+        map = new GameMap(3);
+        map.setGrid(setAreas());
+    }
+
+    public void GameData()
+    {
         player = new Player(1,1,100,100,0);
-        player.addEquipment(new Equipment(1,"Phone",1));
         map = new GameMap(3);
         map.setGrid(setAreas());
     }
@@ -29,47 +35,62 @@ public class GameData {
     public Area[][] setAreas()
     {
         Area[][] areas = new Area[3][3];
-        List<Item> defaultItems =  new LinkedList<Item>();;
-        List<Item> GoalSet1 = new LinkedList<Item>();;
-        List<Item> GoalSet2 = new LinkedList<Item>();;
-        List<Item> GoalSet3 = new LinkedList<Item>();;
+        for(int i=0; i<3; i++)
+        {
+            for(int j=0; j<3; j++)
+            {
+                List<Item> itemSet1 =  new LinkedList<Item>();
 
-        defaultItems.add(new Equipment(1,"Phone",1));
-        defaultItems.add(new Food(10,"Apple",1));
-        defaultItems.add(new Food(-10,"Mashroom",1));
-        defaultItems.add(new Equipment(1,"Rocks",1));
-        defaultItems.add(new Equipment(1,"Gold",1));
+                itemSet1.add(new Equipment(1,"Phone",5));
+                itemSet1.add(new Food(10,"Apple",10));
+                itemSet1.add(new Food(-10,"Mashroom",20));
+                itemSet1.add(new Equipment(1,"Rocks",6));
+                itemSet1.add(new Equipment(1,"Gold",8));
 
-        GoalSet1.add(new Equipment(1,"Jade monkey",1));
-        GoalSet1.add(new Food(10,"Apple",1));
-        GoalSet1.add(new Food(-10,"Mashroom",1));
-        GoalSet1.add(new Equipment(1,"Rocks",1));
-        GoalSet1.add(new Equipment(1,"Gold",1));
+                if(i==0 && j==0)
+                {
+                    areas[i][j] = new Area(true,itemSet1,"Nancledra");
+                }
+                else if(i==0 && j==1)
+                {
+                    areas[i][j] = new Area(true,itemSet1,"Erast");
+                }
+                else if(i==0 && j==2)
+                {
+                    itemSet1.add(new Equipment(1,"Jade monkey",9));
+                    areas[i][j] = new Area(false,itemSet1,"");
+                }
 
-        GoalSet2.add(new Equipment(1,"The roadmap",1));
-        GoalSet2.add(new Food(10,"Apple",1));
-        GoalSet2.add(new Food(-10,"Mashroom",1));
-        GoalSet2.add(new Equipment(1,"Rocks",1));
-        GoalSet2.add(new Equipment(1,"Gold",1));
+                else if(i==1 && j==0)
+                {
+                    areas[i][j] = new Area(false,itemSet1,"");
+                }
+                else if(i==1 && j==1)
+                {
+                    areas[i][j] = new Area(true,itemSet1,"Whitebridge");
+                }
+                else if(i==1 && j==2)
+                {
+                    areas[i][j] = new Area(false,itemSet1,"");
+                }
 
-        GoalSet3.add(new Equipment(1,"Ice scraper",1));
-        GoalSet3.add(new Food(10,"Apple",1));
-        GoalSet3.add(new Food(-10,"Mashroom",1));
-        GoalSet3.add(new Equipment(1,"Rocks",1));
-        GoalSet3.add(new Equipment(1,"Gold",1));
+                else if(i==2 && j==0)
+                {
+                    itemSet1.add(new Equipment(1,"The roadmap",6));
+                    areas[i][j] = new Area(true,itemSet1,"Spalding");
+                }
+                else if(i==2 && j==1)
+                {
+                    areas[i][j] = new Area(false,itemSet1,"");
+                }
+                else if(i==2 && j==2)
+                {
+                    itemSet1.add(new Equipment(1,"Ice scraper",8));
+                    areas[i][j] = new Area(false,itemSet1,"");
+                }
 
-        areas[0][0] = new Area(true,GoalSet2,"Nancledra");
-        areas[0][1] = new Area(true,defaultItems,"Erast");
-        areas[0][2] = new Area(false,defaultItems,"");
-
-        areas[1][0] = new Area(false,defaultItems,"");
-        areas[1][1] = new Area(true,GoalSet1,"Whitebridge");
-        areas[1][2] = new Area(false,defaultItems,"");
-
-        areas[2][0] = new Area(true,defaultItems,"Spalding");
-        areas[2][1] = new Area(false,defaultItems,"");
-        areas[2][2] = new Area(false,GoalSet3,"");
-
+            }
+        }
         return areas;
     }
 

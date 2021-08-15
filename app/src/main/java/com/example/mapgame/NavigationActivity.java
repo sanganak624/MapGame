@@ -14,8 +14,6 @@ public class NavigationActivity extends AppCompatActivity {
 
     private GameData gameData = GameData.getInstance();
 
-    private GameMap map = gameData.getMap();
-    private Player player1 = gameData.getPlayer();
 
 
     //Buttons
@@ -61,7 +59,7 @@ public class NavigationActivity extends AppCompatActivity {
         northButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().setHealth((int) Math.max(0.0,gameData.getPlayer().getHealth()-5.0-(gameData.getPlayer().getEquipmentMass()/2.0)));
                 gameData.getPlayer().incrementRow();
                 gameUpdate();
             }
@@ -70,7 +68,7 @@ public class NavigationActivity extends AppCompatActivity {
         southButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().setHealth((int) Math.max(0.0,gameData.getPlayer().getHealth()-5.0-(gameData.getPlayer().getEquipmentMass()/2.0)));
                 gameData.getPlayer().decrementRow();
                 gameUpdate();
             }
@@ -79,7 +77,7 @@ public class NavigationActivity extends AppCompatActivity {
         eastButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().setHealth((int) Math.max(0.0,gameData.getPlayer().getHealth()-5.0-(gameData.getPlayer().getEquipmentMass()/2.0)));
                 gameData.getPlayer().incrementCol();
                 gameUpdate();
             }
@@ -88,7 +86,7 @@ public class NavigationActivity extends AppCompatActivity {
         westButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameData.getPlayer().setHealth((int) Math.max(0.0,player1.getHealth()-5.0-(player1.getEquipmentMass()/2.0)));
+                gameData.getPlayer().setHealth((int) Math.max(0.0,gameData.getPlayer().getHealth()-5.0-(gameData.getPlayer().getEquipmentMass()/2.0)));
                 gameData.getPlayer().decrementCol();
                 gameUpdate();
             }
@@ -97,7 +95,7 @@ public class NavigationActivity extends AppCompatActivity {
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameSetup();
+                gameData.GameData();
                 gameUpdate();
             }
         });
@@ -105,10 +103,56 @@ public class NavigationActivity extends AppCompatActivity {
         optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NavigationActivity.this, MarketActivity.class));
+                if(currentArea.getText().equals("Town")) {
+                    startActivity(new Intent(NavigationActivity.this, MarketActivity.class));
+                }
+                else
+                {
+                    startActivity(new Intent(NavigationActivity.this, WildernessActivity.class));
+                }
             }
         });
+        winState();
 
+    }
+    private void winState()
+    {
+
+        List<Equipment> playerItem = gameData.getPlayer().getEquipment();
+        int i=0;
+        boolean ck1 = false;
+        boolean ck2 = false;
+        boolean ck3 = false;
+        while(i<playerItem.size())
+        {
+            if(playerItem.get(i).getDescription().equals("Jade monkey"))
+            {
+                ck1 = true;
+            }
+            else if(playerItem.get(i).getDescription().equals("The roadmap"))
+            {
+                ck2 = true;
+            }
+            else if(playerItem.get(i).getDescription().equals("Ice scraper"))
+            {
+                ck3 = true;
+            }
+            i++;
+        }
+        if(ck1&&ck2&&ck3)
+        {
+            status.setText("WINNER");
+            currentArea.setText("YOU HAVE");
+            currentAreaText2.setVisibility(View.VISIBLE);
+            currentAreaText2.setText("WON");
+            status.setVisibility(View.VISIBLE);
+
+            optionsButton.setVisibility(View.INVISIBLE);
+            southButton.setVisibility(View.INVISIBLE);
+            northButton.setVisibility(View.INVISIBLE);
+            westButton.setVisibility(View.INVISIBLE);
+            eastButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void updateStatusBar()
@@ -123,11 +167,13 @@ public class NavigationActivity extends AppCompatActivity {
             health.setText("0");
             status.setText("You Lost The Game :(");
             status.setVisibility(View.VISIBLE);
+            optionsButton.setVisibility(View.INVISIBLE);
         }
         else
         {
             health.setText(Integer.toString(player1Health));
             status.setVisibility(View.INVISIBLE);
+            optionsButton.setVisibility(View.VISIBLE);
         }
         cash.setText(Integer.toString(player1Cash));
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,14 +22,12 @@ public class MarketActivity extends AppCompatActivity {
     private List<Button> itemBuyButtons = new LinkedList<Button>();;
     private List<Button> itemSellButtons = new LinkedList<Button>();;
     private List<TextView> itemText = new LinkedList<TextView>();;
-    private TextView locationText;
 
     private TextView cash;
     private TextView health;
     private TextView equiptmentMass;
 
-    boolean toggle = false;
-
+    private int MAXMASS = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,16 +84,8 @@ public class MarketActivity extends AppCompatActivity {
         inventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(toggle == false) {
-                    Player player = gameData.getPlayer();
-                    fillPlayerItems(player.getEquipment());
-                    toggle = true;
-                }
-                else if(toggle == true)
-                {
-                    updateList();
-                    toggle = false;
-                }
+                Player player = gameData.getPlayer();
+                fillPlayerItems(player.getEquipment());
 
             }
         });
@@ -105,6 +96,252 @@ public class MarketActivity extends AppCompatActivity {
             }
         });
 
+        buyButtonListeners();
+        sellButtonListeners();
+
+    }
+
+    private Area buyAction(int i)
+    {
+        Player player = gameData.getPlayer();
+        Area curArea = (Area) gameData.getMap().getArea(player.getRowLocation(),player.getColLocation());
+        List<Item> items = curArea.getItems();
+        Item item = items.get(i);
+        int curCash = player.getCash();
+        int remCash = curCash - item.getValue();
+        if(remCash > 0)
+        {
+            //Equipment check
+            if (item.getClass().getSimpleName().equals("Equipment")) {
+                Equipment equ = (Equipment) item;
+                int curMass = player.getEquipmentMass();
+                int newMass = curMass + equ.getMass();
+                if(newMass < MAXMASS)
+                {
+                    player.addEquipment((Equipment) item);
+                    player.setEquipmentMass(newMass);
+                    player.setCash(remCash);
+                    items.remove(i);
+                    Toast.makeText(MarketActivity.this, "Purchase successful", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(MarketActivity.this, "To heavy to carry. Purchase Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Food food = (Food) item;
+                int curHealth = player.getHealth();
+                int newHealth = curHealth + food.gethealth();
+
+                if(newHealth<0)
+                {
+                    newHealth = 0;
+                    player.setHealth(newHealth);
+                    startActivity(new Intent(MarketActivity.this, NavigationActivity.class));
+                    //END game
+                }
+                else if(newHealth >= 100)
+                {
+                    newHealth = 100;
+                }
+                player.setHealth(newHealth);
+                items.remove(i);
+                Toast.makeText(MarketActivity.this, "Purchase successful", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        else
+        {
+            Toast.makeText(MarketActivity.this, "Insufficient cash. Purchase Failed", Toast.LENGTH_SHORT).show();
+        }
+        return curArea;
+    }
+
+    private void sellAction(int i)
+    {
+        Player player = gameData.getPlayer();
+        Area curArea = gameData.getMap().getArea(player.getRowLocation(),player.getColLocation());
+        List<Item> areaItems = curArea.getItems();
+
+        if(areaItems.size()<9)
+        {
+
+            List<Equipment> items = player.getEquipment();
+            Equipment equ = items.get(i);
+            int curCash = player.getCash();
+            int remCash = curCash + equ.getValue();
+
+            int curMass = player.getEquipmentMass();
+            int newMass = curMass - equ.getMass();
+
+            player.setEquipmentMass(newMass);
+            player.setCash(remCash);
+
+            areaItems.add(equ);
+
+            items.remove(i);
+
+            Toast.makeText(MarketActivity.this, "Sale successful", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(MarketActivity.this, "Market Full, Sale Failed", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private void buyButtonListeners()
+    {
+        itemBuyButtons.get(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(0);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(1);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(2);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(3);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(4);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(5);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(6);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(7);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+        itemBuyButtons.get(8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Area curArea = buyAction(8);
+                updateStatusBar();
+                fillAreaItems(curArea.getItems());
+            }
+        });
+    }
+
+    private void sellButtonListeners()
+    {
+        itemSellButtons.get(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(0);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(1);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(2);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(3);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(4);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(5);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(6);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(7);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
+        itemSellButtons.get(8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sellAction(8);
+                updateStatusBar();
+                fillPlayerItems(gameData.getPlayer().getEquipment());
+            }
+        });
     }
 
     private void updateList()
@@ -112,17 +349,9 @@ public class MarketActivity extends AppCompatActivity {
         Player player = gameData.getPlayer();
         int row = player.getRowLocation();
         int col = player.getColLocation();
-        Area area = new Area();
-        try {
-            area = (Area) gameData.getMap().getArea(row,col).clone();
-        }
-        catch (Exception e)
-        {
-
-        }
+        Area area = (Area) gameData.getMap().getArea(row,col);
 
         List<Item> items = area.getItems();
-
         fillAreaItems(items);
 
     }
@@ -134,36 +363,25 @@ public class MarketActivity extends AppCompatActivity {
         while(i<items.size())
         {
             Item currentItem = items.get(i);
+            Button buyButton = itemBuyButtons.get(i);
+            Button sellButton = itemSellButtons.get(i);
+            TextView textBox = itemText.get(i);
             if(currentItem.getClass().getSimpleName().equals("Equipment"))
             {
                 Equipment currentEqu = (Equipment) currentItem;
-                Button buyButton = itemBuyButtons.get(i);
-                Button sellButton = itemSellButtons.get(i);
-                TextView textBox = itemText.get(i);
-
-                buyButton.setText(Integer.toString(currentEqu.getValue()));
-                sellButton.setText(Double.toString(currentEqu.getValue()*0.75));
+                buyButton.setText("$"+Integer.toString(currentEqu.getValue()));
                 textBox.setText(currentEqu.getDescription()+" (Mass:"+Integer.toString(currentEqu.getMass())+")");
-
-                buyButton.setVisibility(View.VISIBLE);
-                sellButton.setVisibility(View.VISIBLE);
-                textBox.setVisibility(View.VISIBLE);
-
             }
             else
             {
                 Food currentEqu = (Food) currentItem;
-                Button buyButton = itemBuyButtons.get(i);
-                Button sellButton = itemSellButtons.get(i);
-                TextView textBox = itemText.get(i);
-
-                buyButton.setText(Integer.toString(currentEqu.getValue()));
-                sellButton.setText(Double.toString(currentEqu.getValue()*0.75));
+                buyButton.setText("$"+Integer.toString(currentEqu.getValue()));
                 textBox.setText(currentEqu.getDescription());
-                buyButton.setVisibility(View.VISIBLE);
-                sellButton.setVisibility(View.VISIBLE);
-                textBox.setVisibility(View.VISIBLE);
             }
+
+            buyButton.setVisibility(View.VISIBLE);
+            sellButton.setVisibility(View.INVISIBLE);
+            textBox.setVisibility(View.VISIBLE);
             i++;
         }
 
@@ -194,11 +412,10 @@ public class MarketActivity extends AppCompatActivity {
                 Button sellButton = itemSellButtons.get(i);
                 TextView textBox = itemText.get(i);
 
-                buyButton.setText(Integer.toString(currentEqu.getValue()));
-                sellButton.setText(Double.toString(currentEqu.getValue() * 0.75));
+                sellButton.setText("$"+Double.toString(currentEqu.getValue() * 0.75));
                 textBox.setText(currentEqu.getDescription() + " (Mass:" + Integer.toString(currentEqu.getMass()) + ")");
 
-                buyButton.setVisibility(View.VISIBLE);
+                buyButton.setVisibility(View.INVISIBLE);
                 sellButton.setVisibility(View.VISIBLE);
                 textBox.setVisibility(View.VISIBLE);
 
